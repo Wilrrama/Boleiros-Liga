@@ -2,8 +2,14 @@ import { styled } from "styled-components";
 import logo from "../assets/images/liga.png";
 import Switch from "react-switch";
 import { StyledHeader } from "../styles/styledHeader";
+import { useState } from "react";
+import light from "../styles/themes/light";
 
-export const Header = ({ children }) => {
+import { useTheme } from "styled-components";
+
+export const Header = ({ children, toggleTheme }) => {
+  const theme = useTheme(light);
+
   const getCurrentDate = () => {
     const currentDate = new Date();
     const options = { year: "numeric", month: "long", day: "numeric" };
@@ -27,7 +33,15 @@ export const Header = ({ children }) => {
         <section>
           <p>{getCurrentDate()}</p>
           <p>{getCurrentTime()}</p>
-          <Switch height={15} checkedIcon={false} handDiameter={15} />
+          <Switch
+            onChange={toggleTheme}
+            checked={theme === light}
+            height={15}
+            checkedIcon={false}
+            offColor={theme.colors.secondary}
+            onColor={theme.colors.secondary}
+            handDiameter={15}
+          />
           <p>by bigode</p>
         </section>
       </StyledHeader>

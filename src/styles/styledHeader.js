@@ -7,7 +7,8 @@ export const StyledHeader = styled.header`
   justify-content: space-around;
   align-items: center;
   padding: 2px;
-  background-color: #6170e3;
+  //background-color: #6170e3;
+  background-color: ${(props) => props.theme.colors.primary};
 
   img {
     width: 80px;

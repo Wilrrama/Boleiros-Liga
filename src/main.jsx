@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyled } from "./styles/globalStyles.js";
+import dark from "./styles/themes/dark.js";
+import light from "./styles/themes/light.js";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ThemeProvider theme={{}}>
-      <GlobalStyled />
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>
-);
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+function Main() {
+  const [theme, setTheme] = useState(light); // Inicialize o tema com o tema light
+
+  const toggleTheme = () => {
+    // Adicione esta linha
+    setTheme((prevTheme) => (prevTheme === light ? dark : light));
+    // Adicione esta linha
+  };
+
+  return (
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <GlobalStyled />
+        <App toggleTheme={toggleTheme} />
+      </ThemeProvider>
+    </React.StrictMode>
+  );
+}
+
+root.render(<Main />);

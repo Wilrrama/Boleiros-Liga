@@ -6,11 +6,11 @@ import { Chores } from "./pages/Chores";
 import { NameProvider } from "./contexts/NameContext";
 import { ChoreProvider } from "./contexts/ChoreContext";
 
-export const App = () => {
+export const App = ({ toggleTheme }) => {
   const [activeSection, setActiveSection] = useState("people");
   return (
     <>
-      <Header>
+      <Header toggleTheme={toggleTheme}>
         <Nav
           activeSection={activeSection}
           setActiveSection={setActiveSection}

@@ -13,7 +13,7 @@ export const ChoreProvider = ({ children }) => {
     const newChore = {
       id: chores.length + 1,
       task: task,
-      complete: false,
+      completed: false,
     };
 
     setChores((oldChores) => [...oldChores, newChore]);
@@ -25,10 +25,15 @@ export const ChoreProvider = ({ children }) => {
   }
 
   function completeTask(id) {
-    const filteredChores = chores.map((chore) =>
-      chore.id === id ? { ...chore, completed: !chore.completed } : chore
+    const updatedChores = chores.map((chore) =>
+      chore.id === id
+        ? { ...chore, completed: !chore.completed } // Inverte o valor da propriedade completed
+        : chore
     );
-    setChores(filteredChores);
+    setChores(updatedChores);
+
+    // Salve as tarefas atualizadas no localStorage
+    localStorage.setItem("@choreList", JSON.stringify(updatedChores));
   }
 
   const removeAllTask = () => {
