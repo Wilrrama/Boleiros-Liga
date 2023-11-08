@@ -11,6 +11,7 @@ export const StyledNav = styled.nav`
   }
 
   button:hover {
-    color: yellow;
+    color: greenyellow;
+    font-size: 23px;
   }
 `;

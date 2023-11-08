@@ -3,7 +3,7 @@ import { Button } from "../fragments/Button";
 import { Input } from "../fragments/Input";
 import { BsCardChecklist } from "react-icons/bs";
 import { AiOutlineClear } from "react-icons/ai";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Import useEffect and useState
 import { useContext } from "react";
 import { ChoreContext } from "../contexts/ChoreContext";
 import { StyledMain } from "../styles/styledChores";
@@ -13,10 +13,36 @@ export const Chores = () => {
   const { chores, saveNewChore, deleteChore, completeTask, removeAllTask } =
     useContext(ChoreContext);
 
+  const [checkboxes, setCheckboxes] = useState({}); // State to store checkbox values
+
+  // Load checkbox values from local storage on component mount
+  useEffect(() => {
+    const storedCheckboxes = JSON.parse(localStorage.getItem("checkboxes"));
+    if (storedCheckboxes) {
+      setCheckboxes(storedCheckboxes);
+    }
+  }, []);
+
+  // Save checkbox values to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
+  }, [checkboxes]);
+
   function handleSaveNewChore(event) {
     event.preventDefault();
     saveNewChore(chore);
     setChore("");
+  }
+
+  function handleCheckboxChange(choreId) {
+    // Toggle the checkbox value in the state
+    setCheckboxes((prevCheckboxes) => ({
+      ...prevCheckboxes,
+      [choreId]: !prevCheckboxes[choreId],
+    }));
+
+    // Call the completeTask function to update the completion status
+    completeTask(choreId);
   }
 
   return (
@@ -45,10 +71,14 @@ export const Chores = () => {
           ) : (
             chores.map((chore) => (
               <li key={chore.id}>
-                <input type="checkbox" onClick={() => completeTask(chore.id)} />
+                <input
+                  type="checkbox"
+                  checked={checkboxes[chore.id] || false} // Set the checkbox state
+                  onChange={() => handleCheckboxChange(chore.id)}
+                />
                 <span
                   style={{
-                    textDecoration: chore.completed && "line-through",
+                    textDecoration: checkboxes[chore.id] && "line-through",
                   }}
                 >
                   {chore.task}

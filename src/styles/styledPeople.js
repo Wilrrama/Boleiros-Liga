@@ -3,7 +3,7 @@ import campo from "../assets/images/campo_de_futebol.png";
 
 export const BackgroundContainer = styled.div`
   position: fixed;
-  top: 1;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -12,7 +12,8 @@ export const BackgroundContainer = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(50%) contrast(150%) saturate(200%);
+  background-repeat: no-repeat;
+  filter: brightness(50%) contrast(60%) saturate(200%);
 `;
 
 export const StyledMain = styled.main`
