@@ -26,14 +26,14 @@ export const ChoreProvider = ({ children }) => {
 
   function completeTask(id) {
     const updatedChores = chores.map((chore) =>
-      chore.id === id
-        ? { ...chore, completed: !chore.completed } // Inverte o valor da propriedade completed
-        : chore
+      chore.id === id ? { ...chore, completed: !chore.completed } : chore
     );
     setChores(updatedChores);
 
-    // Salve as tarefas atualizadas no localStorage
     localStorage.setItem("@choreList", JSON.stringify(updatedChores));
+    if (updatedChores.length === 0) {
+      setCheckboxes({});
+    }
   }
 
   const removeAllTask = () => {

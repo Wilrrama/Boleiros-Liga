@@ -3,11 +3,12 @@ import { Nav } from "./components/Nav";
 import { useState } from "react";
 import { People } from "./pages/People";
 import { Chores } from "./pages/Chores";
+import { SellBalls } from "./pages/SellBalls";
 import { NameProvider } from "./contexts/NameContext";
 import { ChoreProvider } from "./contexts/ChoreContext";
 
 export const App = ({ toggleTheme }) => {
-  const [activeSection, setActiveSection] = useState("people");
+  const [activeSection, setActiveSection] = useState("sellballs");
   return (
     <>
       <Header toggleTheme={toggleTheme}>
@@ -16,7 +17,9 @@ export const App = ({ toggleTheme }) => {
           setActiveSection={setActiveSection}
         />
       </Header>
-      {activeSection === "people" ? (
+      {activeSection === "sellballs" ? (
+        <SellBalls />
+      ) : activeSection === "people" ? (
         <NameProvider>
           <People />
         </NameProvider>

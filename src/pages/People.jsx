@@ -7,7 +7,6 @@ import { Input } from "../fragments/Input";
 import { Form } from "../fragments/Form";
 import { Button } from "../fragments/Button";
 import { StyledMain, BackgroundContainer } from "../styles/styledPeople";
-import campo from "../assets/images/campo_de_futebol.png";
 
 export const People = () => {
   const [valueName, setValueName] = useState("");

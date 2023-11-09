@@ -1,48 +1,69 @@
 import { Form } from "../fragments/Form";
 import { Button } from "../fragments/Button";
-import { Input } from "../fragments/Input";
 import { BsCardChecklist } from "react-icons/bs";
 import { AiOutlineClear } from "react-icons/ai";
-import { useState, useEffect } from "react"; // Import useEffect and useState
+import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { ChoreContext } from "../contexts/ChoreContext";
 import { StyledMain } from "../styles/styledChores";
 
 export const Chores = () => {
   const [chore, setChore] = useState("");
+  const [checkboxes, setCheckboxes] = useState({});
   const { chores, saveNewChore, deleteChore, completeTask, removeAllTask } =
     useContext(ChoreContext);
 
-  const [checkboxes, setCheckboxes] = useState({}); // State to store checkbox values
-
-  // Load checkbox values from local storage on component mount
   useEffect(() => {
-    const storedCheckboxes = JSON.parse(localStorage.getItem("checkboxes"));
+    const storedCheckboxes = JSON.parse(localStorage.getItem("@checkboxes"));
     if (storedCheckboxes) {
       setCheckboxes(storedCheckboxes);
     }
   }, []);
 
-  // Save checkbox values to local storage whenever they change
   useEffect(() => {
-    localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
+    localStorage.setItem("@checkboxes", JSON.stringify(checkboxes));
   }, [checkboxes]);
 
   function handleSaveNewChore(event) {
     event.preventDefault();
+    const nextCheckboxKey = Object.keys(checkboxes).length + 1;
     saveNewChore(chore);
+    setCheckboxes((prevCheckboxes) => ({
+      ...prevCheckboxes,
+      [nextCheckboxKey]: false,
+    }));
     setChore("");
   }
 
   function handleCheckboxChange(choreId) {
-    // Toggle the checkbox value in the state
     setCheckboxes((prevCheckboxes) => ({
       ...prevCheckboxes,
       [choreId]: !prevCheckboxes[choreId],
     }));
-
-    // Call the completeTask function to update the completion status
     completeTask(choreId);
+  }
+
+  const removeAllChecks = () => {
+    setCheckboxes({});
+  };
+
+  function handleClearButtonClick() {
+    removeAllTask();
+    removeAllChecks();
+  }
+
+  function handleClearItem(choreId) {
+    const updatedCheckboxes = { ...checkboxes };
+    delete updatedCheckboxes[choreId];
+    localStorage.setItem("@checkboxes", JSON.stringify(updatedCheckboxes));
+
+    setCheckboxes((prevCheckboxes) => {
+      const newCheckboxes = { ...prevCheckboxes };
+      delete newCheckboxes[choreId];
+      return newCheckboxes;
+    });
+
+    deleteChore(choreId);
   }
 
   return (
@@ -59,7 +80,7 @@ export const Chores = () => {
         <Button type="submit">
           <BsCardChecklist />
         </Button>
-        <Button type="button" onClick={removeAllTask}>
+        <Button type="button" onClick={handleClearButtonClick}>
           <AiOutlineClear />
         </Button>
       </Form>
@@ -73,7 +94,7 @@ export const Chores = () => {
               <li key={chore.id}>
                 <input
                   type="checkbox"
-                  checked={checkboxes[chore.id] || false} // Set the checkbox state
+                  checked={checkboxes[chore.id] || false}
                   onChange={() => handleCheckboxChange(chore.id)}
                 />
                 <span
@@ -83,7 +104,7 @@ export const Chores = () => {
                 >
                   {chore.task}
                 </span>
-                <button onClick={() => deleteChore(chore.id)} type="button">
+                <button onClick={() => handleClearItem(chore.id)} type="button">
                   excluir
                 </button>
               </li>

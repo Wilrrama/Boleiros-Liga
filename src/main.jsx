@@ -9,12 +9,10 @@ import light from "./styles/themes/light.js";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 function Main() {
-  const [theme, setTheme] = useState(light); // Inicialize o tema com o tema light
+  const [theme, setTheme] = useState(light);
 
   const toggleTheme = () => {
-    // Adicione esta linha
     setTheme((prevTheme) => (prevTheme === light ? dark : light));
-    // Adicione esta linha
   };
 
   return (
