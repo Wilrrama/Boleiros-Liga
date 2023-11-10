@@ -66,17 +66,6 @@ export const Chores = () => {
     deleteChore(choreId);
   }
 
-  // function handleClearItem(choreId) {
-  //   // Remova a entrada do localStorage correspondente ao choreId
-  //   const updatedCheckboxes = { ...checkboxes };
-  //   delete updatedCheckboxes[choreId];
-  //   localStorage.setItem("@checkboxes", JSON.stringify(updatedCheckboxes));
-
-  //   // Em seguida, exclua a tarefa da lista
-  //   deleteChore(choreId);
-  //   setCheckboxes(updatedCheckboxes); // Atualize o estado do objeto checkboxes
-  // }
-
   return (
     <StyledMain>
       <h2>Lista dos Itens</h2>
