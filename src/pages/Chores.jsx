@@ -9,7 +9,7 @@ import { StyledMain } from "../styles/styledChores";
 
 export const Chores = () => {
   const [chore, setChore] = useState("");
-  const [checkboxes, setCheckboxes] = useState({});
+  const [checkboxes, setCheckboxes] = useState([]);
   const { chores, saveNewChore, deleteChore, completeTask, removeAllTask } =
     useContext(ChoreContext);
 
@@ -65,6 +65,17 @@ export const Chores = () => {
 
     deleteChore(choreId);
   }
+
+  // function handleClearItem(choreId) {
+  //   // Remova a entrada do localStorage correspondente ao choreId
+  //   const updatedCheckboxes = { ...checkboxes };
+  //   delete updatedCheckboxes[choreId];
+  //   localStorage.setItem("@checkboxes", JSON.stringify(updatedCheckboxes));
+
+  //   // Em seguida, exclua a tarefa da lista
+  //   deleteChore(choreId);
+  //   setCheckboxes(updatedCheckboxes); // Atualize o estado do objeto checkboxes
+  // }
 
   return (
     <StyledMain>

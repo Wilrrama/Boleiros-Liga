@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-
 import { createContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const ChoreContext = createContext({});
 
@@ -11,7 +11,7 @@ export const ChoreProvider = ({ children }) => {
     if (!task) return;
 
     const newChore = {
-      id: chores.length + 1,
+      id: uuidv4(),
       task: task,
       completed: false,
     };
