@@ -5,7 +5,7 @@ import { AiOutlineClear } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { ChoreContext } from "../contexts/ChoreContext";
-import { StyledMain } from "../styles/styledChores";
+import { StyledMain, BackgroundContainer } from "../styles/styledChores";
 
 export const Chores = () => {
   const [chore, setChore] = useState("");
@@ -67,51 +67,57 @@ export const Chores = () => {
   }
 
   return (
-    <StyledMain>
-      <h2>Lista dos Itens</h2>
-      <Form onSubmit={handleSaveNewChore}>
-        <input
-          label=""
-          type="text"
-          placeholder="Item ou tarefa"
-          value={chore}
-          onChange={(event) => setChore(event.target.value)}
-        />
-        <Button type="submit">
-          <BsCardChecklist />
-        </Button>
-        <Button type="button" onClick={handleClearButtonClick}>
-          <AiOutlineClear />
-        </Button>
-      </Form>
+    <>
+      <BackgroundContainer />
+      <StyledMain>
+        <h2>Lista dos Itens</h2>
+        <Form onSubmit={handleSaveNewChore}>
+          <input
+            label=""
+            type="text"
+            placeholder="Item ou tarefa"
+            value={chore}
+            onChange={(event) => setChore(event.target.value)}
+          />
+          <Button type="submit">
+            <BsCardChecklist />
+          </Button>
+          <Button type="button" onClick={handleClearButtonClick}>
+            <AiOutlineClear />
+          </Button>
+        </Form>
 
-      <div className="chores-list">
-        <ul>
-          {!chores.length ? (
-            <p>Lista Vazia</p>
-          ) : (
-            chores.map((chore) => (
-              <li key={chore.id}>
-                <input
-                  type="checkbox"
-                  checked={checkboxes[chore.id] || false}
-                  onChange={() => handleCheckboxChange(chore.id)}
-                />
-                <span
-                  style={{
-                    textDecoration: checkboxes[chore.id] && "line-through",
-                  }}
-                >
-                  {chore.task}
-                </span>
-                <button onClick={() => handleClearItem(chore.id)} type="button">
-                  excluir
-                </button>
-              </li>
-            ))
-          )}
-        </ul>
-      </div>
-    </StyledMain>
+        <div className="chores-list">
+          <ul>
+            {!chores.length ? (
+              <p>Lista Vazia</p>
+            ) : (
+              chores.map((chore) => (
+                <li key={chore.id}>
+                  <input
+                    type="checkbox"
+                    checked={checkboxes[chore.id] || false}
+                    onChange={() => handleCheckboxChange(chore.id)}
+                  />
+                  <span
+                    style={{
+                      textDecoration: checkboxes[chore.id] && "line-through",
+                    }}
+                  >
+                    {chore.task}
+                  </span>
+                  <button
+                    onClick={() => handleClearItem(chore.id)}
+                    type="button"
+                  >
+                    excluir
+                  </button>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
+      </StyledMain>
+    </>
   );
 };

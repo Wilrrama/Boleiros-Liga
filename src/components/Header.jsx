@@ -1,10 +1,7 @@
-import { styled } from "styled-components";
 import logo from "../assets/images/liga.png";
 import Switch from "react-switch";
 import { StyledHeader } from "../styles/styledHeader";
-import { useState } from "react";
 import light from "../styles/themes/light";
-
 import { useTheme } from "styled-components";
 
 export const Header = ({ children, toggleTheme }) => {
@@ -31,7 +28,7 @@ export const Header = ({ children, toggleTheme }) => {
           {children}
         </div>
         <section>
-          <p>{getCurrentDate()}</p>
+          <h2>{getCurrentDate()}</h2>
           <p>{getCurrentTime()}</p>
           <Switch
             onChange={toggleTheme}

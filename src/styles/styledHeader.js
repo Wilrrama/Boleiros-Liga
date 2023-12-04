@@ -7,7 +7,6 @@ export const StyledHeader = styled.header`
   justify-content: space-around;
   align-items: center;
   padding: 2px;
-  //background-color: #6170e3;
   background-color: ${(props) => props.theme.colors.primary};
 
   img {
@@ -20,8 +19,9 @@ export const StyledHeader = styled.header`
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 3px;
     h1 {
-      font-size: 12px;
+      font-size: 8px;
       align-self: center;
       display: flex;
       align-items: center;
@@ -33,7 +33,12 @@ export const StyledHeader = styled.header`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 5px;
+    h2 {
+      color: white;
+      font-size: 8px;
+      font-weight: 500;
+    }
     p {
       color: white;
       font-size: 10px;
