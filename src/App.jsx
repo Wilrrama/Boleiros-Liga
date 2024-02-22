@@ -6,6 +6,7 @@ import { Chores } from "./pages/Chores";
 import { SellBalls } from "./pages/SellBalls";
 import { NameProvider } from "./contexts/NameContext";
 import { ChoreProvider } from "./contexts/ChoreContext";
+import { Footer } from "./components/Footer";
 
 export const App = ({ toggleTheme }) => {
   const [activeSection, setActiveSection] = useState("sellballs");
@@ -28,6 +29,7 @@ export const App = ({ toggleTheme }) => {
           <Chores />
         </ChoreProvider>
       )}
+      <Footer />
     </>
   );
 };

@@ -63,6 +63,8 @@ export const StyledMain = styled.main`
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 15px;
     h3 {
       color: whitesmoke;
@@ -77,7 +79,7 @@ export const StyledMain = styled.main`
     display: flex;
     align-items: center;
     margin-left: 15%;
-    /* justify-content: center; */
+    justify-content: center;
     gap: 5px;
     p {
       color: whitesmoke;

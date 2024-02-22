@@ -42,19 +42,19 @@ export const SellBalls = () => {
             </div>
           </li>
           <li className="product">
-            <img src={infinity1} alt="" />
-            <div>
-              <h3>Euro Infinity </h3>
-              <p>Oficial, várias cores</p>
-              <h3>R$ 100,00</h3>
-            </div>
-          </li>
-          <li className="product">
             <img src={n1} alt="" />
             <div>
               <h3>Bola Recreativa </h3>
               <p>Não Oficial, várias cores</p>
               <h3>R$ 80,00</h3>
+            </div>
+          </li>
+          <li className="product">
+            <img src={infinity1} alt="" />
+            <div>
+              <h3>Euro Infiity </h3>
+              <p>Bola Oficial, várias cores</p>
+              <h3>R$ 100,00</h3>
             </div>
           </li>
         </ul>
